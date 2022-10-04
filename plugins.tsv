@@ -1,5 +1,5 @@
 TITLE	verb description	http://download.url/ext.war
-OHIF-Viewer	is an MRI viewer upgrade.	https://api.bitbucket.org/2.0/repositories/icrimaginginformatics/ohif-viewer-xnat-plugin/downloads/ohif-viewer-3.3.0.jar
+OHIF-Viewer	is an MRI viewer.	https://api.bitbucket.org/2.0/repositories/icrimaginginformatics/ohif-viewer-xnat-plugin/downloads/ohif-viewer-3.3.0.jar
 xSync	syncs xnat projects across servers.	https://api.bitbucket.org/2.0/repositories/xnatdev/xsync/downloads/xsync-plugin-all-1.4.0.1.jar
 Container-Service	creates containers to run programs on data	https://api.bitbucket.org/2.0/repositories/xnatdev/container-service/downloads/container-service-3.2.1-fat.jar
 Batch-Launch	launches containers or pipelines in batches	https://api.bitbucket.org/2.0/repositories/xnatx/xnatx-batch-launch-plugin/downloads/batch-launch-0.6.0.jar
