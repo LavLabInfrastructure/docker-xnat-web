@@ -3,4 +3,3 @@ OHIF-Viewer	is an MRI viewer.	https://api.bitbucket.org/2.0/repositories/icrimag
 xSync	syncs xnat projects across servers.	https://api.bitbucket.org/2.0/repositories/xnatdev/xsync/downloads/xsync-plugin-all-1.4.0.1.jar
 Container-Service	creates containers to run programs on data	https://api.bitbucket.org/2.0/repositories/xnatdev/container-service/downloads/container-service-3.2.1-fat.jar
 Batch-Launch	launches containers or pipelines in batches	https://api.bitbucket.org/2.0/repositories/xnatx/xnatx-batch-launch-plugin/downloads/batch-launch-0.6.0.jar
-OIDC-Provider uses OIDC to authorize users http://dev.redboxresearchdata.com.au/nexus/service/local/artifact/maven/redirect?r=snapshots&g=au.edu.qcif.xnat.openid&a=openid-auth-plugin&v=LATEST&e=jar
