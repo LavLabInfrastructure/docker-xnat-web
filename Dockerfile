@@ -1,6 +1,7 @@
 FROM tomcat:9-jdk8-openjdk-buster
 
 # Default Environment
+ENV POSTGRES_HOST=db 
 ENV POSTGRES_DB=xnat
 ENV POSTGRES_USER=xnat
 ENV POSTGRES_PASSWORD=password
@@ -11,7 +12,7 @@ ENV XNAT_DATASOURCE_NAME=$POSTGRES_DB
 ENV XNAT_DATASOURCE_USERNAME=$POSTGRES_USER
 ENV XNAT_DATASOURCE_PASSWORD=$POSTGRES_PASSWORD
 ENV XNAT_DATASOURCE_DRIVER=org.postgresql.Driver
-ENV XNAT_DATASOURCE_URL=jdbc:postgresql://db/xnat
+ENV XNAT_DATASOURCE_URL=jdbc:postgresql://${POSTGRES_HOST}/${POSTGRES_DB}
 ENV XNAT_EMAIL=mjbarrett@mcw.edu
 ENV XNAT_PROCESSING_URL=http://xnat:8080
 ENV XNAT_SMTP_ENABLED=false
@@ -26,9 +27,6 @@ ENV TOMCAT_XNAT_FOLDER_PATH=${CATALINA_HOME}/webapps/${TOMCAT_XNAT_FOLDER}
 # install prereqs
 RUN apt-get update && apt-get install -y postgresql-client gawk
 
-# add files
-ADD ./scripts/* /startup/
-ADD plugins.tsv /tmp/plugins.tsv
 
 # prepare Tomcat/XNAT directories
 RUN rm -rf ${CATALINA_HOME}/webapps/*
@@ -49,6 +47,10 @@ RUN mkdir -p \
 RUN curl -qLo /tmp/xnat-web-${XNAT_VERSION}.war https://api.bitbucket.org/2.0/repositories/xnatdev/xnat-web/downloads/xnat-web-${XNAT_VERSION}.war
 RUN unzip -o -d ${TOMCAT_XNAT_FOLDER_PATH} /tmp/xnat-web-${XNAT_VERSION}.war
 RUN rm -f /tmp/xnat-web-${XNAT_VERSION}.war
+
+# add files
+ADD ./scripts/* /startup/
+ADD ./resources/* /tmp/
 
 # Entry
 ENTRYPOINT "/startup/entrypoint.sh"
