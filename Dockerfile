@@ -1,32 +1,30 @@
 FROM tomcat:9-jdk8-openjdk-buster
+# Build Args
+ARG XNAT_VERSION=1.8.5.1
+ARG XNAT_ROOT=/data/xnat
+ARG XNAT_HOME=${XNAT_ROOT}/home
+ARG TOMCAT_XNAT_FOLDER=ROOT
+ARG TOMCAT_XNAT_FOLDER_PATH=${CATALINA_HOME}/webapps/${TOMCAT_XNAT_FOLDER}
 
 # Default Environment
+ENV XNAT_VERSION=${XNAT_VERSION}
+ENV XNAT_ROOT=${XNAT_ROOT}
+ENV XNAT_HOME=${XNAT_HOME}
 ENV POSTGRES_HOST=db 
 ENV POSTGRES_DB=xnat
 ENV POSTGRES_USER=xnat
 ENV POSTGRES_PASSWORD=password
-ENV XNAT_VERSION=1.8.5.1
-ENV XNAT_ROOT=/data/xnat
-ENV XNAT_HOME=${XNAT_ROOT}/home
-ENV XNAT_DATASOURCE_NAME=$POSTGRES_DB
-ENV XNAT_DATASOURCE_USERNAME=$POSTGRES_USER
-ENV XNAT_DATASOURCE_PASSWORD=$POSTGRES_PASSWORD
-ENV XNAT_DATASOURCE_DRIVER=org.postgresql.Driver
-ENV XNAT_DATASOURCE_URL=jdbc:postgresql://${POSTGRES_HOST}/${POSTGRES_DB}
-ENV XNAT_EMAIL=mjbarrett@mcw.edu
-ENV XNAT_PROCESSING_URL=http://xnat:8080
+ENV XNAT_EMAIL=
+ENV XNAT_PROCESSING_URL=
 ENV XNAT_SMTP_ENABLED=false
-ENV XNAT_SMTP_HOSTNAME=fake.fake
-ENV XNAT_SMTP_PORT=587
+ENV XNAT_SMTP_HOSTNAME=
+ENV XNAT_SMTP_PORT=
 ENV XNAT_SMTP_AUTH=false
-ENV XNAT_SMTP_USERNAME=user
-ENV XNAT_SMTP_PASSWORD=pass
-ENV TOMCAT_XNAT_FOLDER=ROOT
-ENV TOMCAT_XNAT_FOLDER_PATH=${CATALINA_HOME}/webapps/${TOMCAT_XNAT_FOLDER}
+ENV XNAT_SMTP_USERNAME=
+ENV XNAT_SMTP_PASSWORD=
 
 # install prereqs
 RUN apt-get update && apt-get install -y postgresql-client gawk
-
 
 # prepare Tomcat/XNAT directories
 RUN rm -rf ${CATALINA_HOME}/webapps/*
@@ -48,10 +46,14 @@ RUN curl -qLo /tmp/xnat-web-${XNAT_VERSION}.war https://api.bitbucket.org/2.0/re
 RUN unzip -o -d ${TOMCAT_XNAT_FOLDER_PATH} /tmp/xnat-web-${XNAT_VERSION}.war
 RUN rm -f /tmp/xnat-web-${XNAT_VERSION}.war
 
-# add files
-ADD ./scripts/* /startup/
 ADD ./resources/* /tmp/
+ADD ./scripts/* /startup/
+RUN /startup/install-plugins.sh 
 
-# Entry
+RUN useradd --home /data/xnat/home xnat && \
+        chown -R xnat:xnat /data /usr/local/
+
+USER xnat
+
+HEALTHCHECK CMD [ "curl", "-f", "http://localhost:8080" ]
 ENTRYPOINT "/startup/entrypoint.sh"
-
