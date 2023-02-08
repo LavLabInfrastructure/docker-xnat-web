@@ -1,4 +1,8 @@
-TITLE	verb description	http://download.url/plugin.war
-OHIF-Viewer	is an MRI viewer.	https://api.bitbucket.org/2.0/repositories/icrimaginginformatics/ohif-viewer-xnat-plugin/downloads/ohif-viewer-3.3.0.jar
-Container-Service	creates containers to run programs on data	https://api.bitbucket.org/2.0/repositories/xnatdev/container-service/downloads/container-service-3.2.1-fat.jar
+TITLE	verb description	http://download.url/plugin.jar
+OIDC-Support	allows use of OIDC	https://bitbucket.org/xnatx/openid-auth-plugin/downloads/openid-auth-plugin-1.2.0-SNAPSHOT-xpl.jar
 Batch-Launch	launches containers or pipelines in batches	https://api.bitbucket.org/2.0/repositories/xnatx/xnatx-batch-launch-plugin/downloads/batch-launch-0.6.0.jar
+Container-Service	creates containers to run programs on data	https://api.bitbucket.org/2.0/repositories/xnatdev/container-service/downloads/container-service-3.3.0-fat.jar
+DCM2NII	is a pipeline module for converting dicoms	https://nrgxnat.jfrog.io/artifactory/libs-release/org/nrg/xnat/plugin/dicom-to-nifti/1.0.2/dicom-to-nifti-1.0.2.jar
+OHIF-Viewer	is an MRI viewer.	https://api.bitbucket.org/2.0/repositories/icrimaginginformatics/ohif-viewer-xnat-plugin/downloads/ohif-viewer-3.4.1.jar
+Freesurfer-Common	adds Freesurfer datatypes	https://nrgxnat.jfrog.io/artifactory/libs-release/org/nrg/xnat/plugin/freesurfer-common/1.0.4/freesurfer-common-1.0.4.jar
+JacksonAnnotation	is a missing dependency	https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.14.2/jackson-module-jaxb-annotations-2.14.2.jar

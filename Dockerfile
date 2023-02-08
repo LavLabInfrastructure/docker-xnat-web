@@ -1,6 +1,6 @@
 FROM tomcat:9-jdk8-openjdk-buster
 # Build Args
-ARG XNAT_VERSION=1.8.5.1
+ARG XNAT_VERSION=1.8.6.1
 ARG XNAT_ROOT=/data/xnat
 ARG XNAT_HOME=${XNAT_ROOT}/home
 ARG TOMCAT_XNAT_FOLDER=ROOT
@@ -24,7 +24,7 @@ ENV XNAT_SMTP_USERNAME=
 ENV XNAT_SMTP_PASSWORD=
 
 # install prereqs
-RUN apt-get update && apt-get install -y postgresql-client gawk
+RUN apt-get update && apt-get install -y postgresql-client gawk docker.io
 
 # prepare Tomcat/XNAT directories
 RUN rm -rf ${CATALINA_HOME}/webapps/*
@@ -49,11 +49,18 @@ RUN rm -f /tmp/xnat-web-${XNAT_VERSION}.war
 ADD ./resources/* /tmp/
 ADD ./scripts/* /startup/
 RUN /startup/install-plugins.sh 
+# steal pipelines 
+RUN cd /data/xnat/pipeline && git clone https://github.com/jhuguetn/xnat-pipelines.git && \
+        mv xnat-pipelines/* . && rm -r xnat-pipelines
+
+# dcm2niix dependency for pipeline module
+RUN curl -qLO https://github.com/rordenlab/dcm2niix/releases/download/v1.0.20220720/dcm2niix_lnx.zip && \
+        unzip dcm2niix_lnx.zip && rm dcm2niix_lnx.zip && mv dcm2niix dcm2niibatch /usr/local/bin
 
 RUN useradd --home /data/xnat/home xnat && \
         chown -R xnat:xnat /data /usr/local/
-
+        
+RUN usermod -a -G docker xnat
 USER xnat
-
-HEALTHCHECK CMD [ "curl", "-f", "http://localhost:8080" ]
+HEALTHCHECK --start-period=30s CMD [ "curl", "-f", "http://localhost:8080" ] 
 ENTRYPOINT "/startup/entrypoint.sh"
