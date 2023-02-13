@@ -2,8 +2,7 @@
 # generate xnat config
 if [ ! -f $XNAT_HOME/config/xnat-conf.properties ]; then
   # this is a postgres house
-  XNAT_DATASOURCE_URL=jdbc:postgresql://${POSTGRES_HOST}/${POSTGRES_DB}
-  XNAT_DATASOURCE_NAME=$POSTGRES_DB
+  XNAT_DATASOURCE_URL=jdbc:postgresql://${POSTGRES_HOST}/${XNAT_POSTGRES_DB}
   XNAT_DATASOURCE_USERNAME=$POSTGRES_USER
   XNAT_DATASOURCE_PASSWORD=$POSTGRES_PASSWORD
 

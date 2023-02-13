@@ -1,5 +1,13 @@
 #!/bin/bash
-
+PGPASSWORD=${POSTGRES_PASSWORD:-password} psql -w -h "${POSTGRES_HOST:-postgres}" \
+        -p "${POSTGRES_PORT:-5432}" \
+        -U "${POSTGRES_USER:-root}" \
+        "${XNAT_POSTGRES_DB:-xnat}" 2> /dev/null || \
+    PGPASSWORD=${POSTGRES_PASSWORD:-password} psql -h "${POSTGRES_HOST:-postgres}" \
+        -p "${POSTGRES_PORT:-5432}" \
+        -U "${POSTGRES_USER:-root}" \
+        -d "${POSTGRES_DB:-root}" \
+        -c "create database ${XNAT_POSTGRES_DB:-xnat};"
 set -e
 [[ -e  $XNAT_HOME/logs/init.byte ]] && INIT=1
 for f in /startup/*; do
