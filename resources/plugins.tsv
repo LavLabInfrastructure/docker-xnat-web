@@ -5,4 +5,3 @@ Container-Service	creates containers to run programs on data	https://api.bitbuck
 DCM2NII	is a pipeline module for converting dicoms	https://nrgxnat.jfrog.io/artifactory/libs-release/org/nrg/xnat/plugin/dicom-to-nifti/1.0.2/dicom-to-nifti-1.0.2.jar
 OHIF-Viewer	is an MRI viewer.	https://api.bitbucket.org/2.0/repositories/icrimaginginformatics/ohif-viewer-xnat-plugin/downloads/ohif-viewer-3.4.1.jar
 Freesurfer-Common	adds Freesurfer datatypes	https://nrgxnat.jfrog.io/artifactory/libs-release/org/nrg/xnat/plugin/freesurfer-common/1.0.4/freesurfer-common-1.0.4.jar
-JacksonAnnotation	is a missing dependency	https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.14.2/jackson-module-jaxb-annotations-2.14.2.jar
