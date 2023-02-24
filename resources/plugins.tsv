@@ -1,5 +1,5 @@
 TITLE	verb description	http://download.url/plugin.jar
-OIDC-Support	allows use of OIDC	https://bitbucket.org/xnatx/openid-auth-plugin/downloads/openid-auth-plugin-1.2.0-SNAPSHOT-xpl.jar
+OIDC-Support	allows use of OIDC	https://github.com/Australian-Imaging-Service/xnat-openid-auth-plugin/releases/download/1.0.2/xnat-openid-auth-plugin-all-1.0.2.jar
 Batch-Launch	launches containers or pipelines in batches	https://api.bitbucket.org/2.0/repositories/xnatx/xnatx-batch-launch-plugin/downloads/batch-launch-0.6.0.jar
 Container-Service	creates containers to run programs on data	https://api.bitbucket.org/2.0/repositories/xnatdev/container-service/downloads/container-service-3.3.0-fat.jar
 DCM2NII	is a pipeline module for converting dicoms	https://nrgxnat.jfrog.io/artifactory/libs-release/org/nrg/xnat/plugin/dicom-to-nifti/1.0.2/dicom-to-nifti-1.0.2.jar
